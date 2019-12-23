@@ -28,9 +28,18 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/gridstack/dist/gridstack.css",
+              "src/assets/scss/gridstack-extra.scss",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/lodash/lodash.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/jquery-ui-dist/jquery-ui.js",
+              "node_modules/jquery-ui-touch-punch/jquery.ui.touch-punch.js",
+              "node_modules/gridstack/dist/gridstack.js",
+              "node_modules/gridstack/dist/gridstack.jQueryUI.js"
+            ]
           },
           "configurations": {
             "production": {
