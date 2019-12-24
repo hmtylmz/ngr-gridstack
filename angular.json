@@ -134,33 +134,33 @@
         }
       }
     },
-    "ngx-gridstack": {
+    "ngr-gridstack": {
       "projectType": "library",
-      "root": "projects/ngx-gridstack",
-      "sourceRoot": "projects/ngx-gridstack/src",
+      "root": "projects/ngr-gridstack",
+      "sourceRoot": "projects/ngr-gridstack/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/ngx-gridstack/tsconfig.lib.json",
-            "project": "projects/ngx-gridstack/ng-package.json"
+            "tsConfig": "projects/ngr-gridstack/tsconfig.lib.json",
+            "project": "projects/ngr-gridstack/ng-package.json"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ngx-gridstack/src/test.ts",
-            "tsConfig": "projects/ngx-gridstack/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-gridstack/karma.conf.js"
+            "main": "projects/ngr-gridstack/src/test.ts",
+            "tsConfig": "projects/ngr-gridstack/tsconfig.spec.json",
+            "karmaConfig": "projects/ngr-gridstack/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ngx-gridstack/tsconfig.lib.json",
-              "projects/ngx-gridstack/tsconfig.spec.json"
+              "projects/ngr-gridstack/tsconfig.lib.json",
+              "projects/ngr-gridstack/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
