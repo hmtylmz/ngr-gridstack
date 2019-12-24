@@ -141,10 +141,10 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ngx-packagr:build",
+          "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
             "tsConfig": "projects/ngx-gridstack/tsconfig.lib.json",
-            "project": "projects/ngx-gridstack/ngx-package.json"
+            "project": "projects/ngx-gridstack/ng-package.json"
           }
         },
         "test": {
