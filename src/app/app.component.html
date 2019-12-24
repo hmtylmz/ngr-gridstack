@@ -1,7 +1,7 @@
 <div>
   <app-gridstack [options]="options">
-    <app-gridstack-item *ngFor="let item of items; index as index" [x]="item.x" [y]="item.y" [width]="item.width" [height]="item.height">
-      Hello {{index}}
+    <app-gridstack-item *ngFor="let item of items; index as index" [x]="item.x" [y]="item.y" [width]="item.width" [height]="item.height" [id]="item.id">
+      Id: {{item.id}}
     </app-gridstack-item>
   </app-gridstack>
 </div>

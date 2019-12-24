@@ -15,12 +15,14 @@ export class AppComponent implements AfterViewInit {
 
   items = [
     {
+      id: 'abc',
       x: 0,
       y: 0,
       width: 5,
       height: 5
     },
     {
+      id: 'bcd',
       x: 10,
       y: 10,
       width: 15,
@@ -33,11 +35,22 @@ export class AppComponent implements AfterViewInit {
     // console.log(a);
     setTimeout(() => {
       this.items.push({
+        id: 'efc',
         x: 3,
         y: 10,
         width: 5,
         height: 5
       });
+      setTimeout(() => {
+        // this.items[0].x = 20;
+        this.items.push({
+          id: 'efcw',
+          x: 3,
+          y: 10,
+          width: 5,
+          height: 5
+        });
+      }, 3000);
     }, 1000);
   }
 }

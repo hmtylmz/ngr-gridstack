@@ -1,10 +1,11 @@
+/// <reference types="jquery" />
+/// <reference types="gridstack" />
+
 import {
-  Component, HostBinding, AfterViewInit, ChangeDetectionStrategy, ElementRef, Input, ContentChildren, QueryList, Renderer2, OnInit
+  Component, ChangeDetectionStrategy, ElementRef, Input, ContentChildren, QueryList, Renderer2, OnInit, Output, EventEmitter
 } from '@angular/core';
 import { GridstackItemComponent } from '../gridstack-item/gridstack-item.component';
 import { GridstackService } from '../gridstack.service';
-
-declare let jQuery: any;
 
 @Component({
   selector: 'app-gridstack',
@@ -15,12 +16,11 @@ declare let jQuery: any;
 export class GridstackComponent implements OnInit {
   @ContentChildren(GridstackItemComponent) items: QueryList<GridstackItemComponent>;
 
-  @Input() options: any;
+  @Input() options: GridstackOptions;
+  @Output() change = new EventEmitter<any>();
 
   previousItems: Array<HTMLElement>;
   element: HTMLElement;
-
-  grid: any;
 
   constructor(
     private elementRef: ElementRef,
@@ -33,6 +33,7 @@ export class GridstackComponent implements OnInit {
   ngOnInit() {
     jQuery(this.element).gridstack(this.options);
     this.gridstackService.grid = jQuery(this.element).data('gridstack');
+    jQuery(this.element).on('change', (event, items) => this.change.emit(items));
   }
 
 }

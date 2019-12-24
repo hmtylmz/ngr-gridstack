@@ -1,7 +1,8 @@
-import { Component, OnInit, HostBinding, ChangeDetectionStrategy, Input, Renderer2, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { GridstackService } from '../gridstack.service';
+/// <reference types="jquery" />
+/// <reference types="gridstack" />
 
-declare let jQuery: any;
+import { Component, ChangeDetectionStrategy, Input, Renderer2, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { GridstackService } from '../gridstack.service';
 
 @Component({
   selector: 'app-gridstack-item',
@@ -16,6 +17,7 @@ export class GridstackItemComponent implements AfterViewInit, OnDestroy {
     if (value !== this._x) {
       this._x = value;
       this.renderer.setAttribute(this.element, 'data-gs-x', this._x.toString());
+      this.move();
     }
   }
   get x(): number {
@@ -26,6 +28,7 @@ export class GridstackItemComponent implements AfterViewInit, OnDestroy {
     if (value !== this._y) {
       this._y = value;
       this.renderer.setAttribute(this.element, 'data-gs-y', this._y.toString());
+      this.move();
     }
   }
   get y(): number {
@@ -36,6 +39,7 @@ export class GridstackItemComponent implements AfterViewInit, OnDestroy {
     if (value !== this._width) {
       this._width = value;
       this.renderer.setAttribute(this.element, 'data-gs-width', this._width.toString());
+      this.resize();
     }
   }
   get width(): number {
@@ -46,6 +50,7 @@ export class GridstackItemComponent implements AfterViewInit, OnDestroy {
     if (value !== this._height) {
       this._height = value;
       this.renderer.setAttribute(this.element, 'data-gs-height', this._height.toString());
+      this.resize();
     }
   }
   get height(): number {
@@ -53,7 +58,6 @@ export class GridstackItemComponent implements AfterViewInit, OnDestroy {
   }
 
   element: HTMLElement;
-  private gridItem: any;
 
   private _x: number;
   private _y: number;
@@ -72,17 +76,24 @@ export class GridstackItemComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    console.log(this.gridstackService.grid);
     this.renderer.setAttribute(this.element, 'data-gs-id', this.id);
     if (this.gridstackService.grid.willItFit(this.x, this.y, this.width, this.height, true)) {
-      this.gridItem = this.gridstackService.grid.makeWidget(this.element);
+      this.gridstackService.grid.makeWidget(this.element);
     } else {
       console.error('Not enough free space to place the widget');
     }
   }
 
   ngOnDestroy(): void {
-    this.gridstackService.grid.remove(this.element);
+    this.gridstackService.grid.removeWidget(this.element);
+  }
+
+  private move() {
+    this.gridstackService.grid.move(this.element, this.x, this.y);
+  }
+
+  private resize() {
+    this.gridstackService.grid.resize(this.element, this.width, this.height);
   }
 
 }
