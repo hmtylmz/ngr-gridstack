@@ -1,4 +1,8 @@
-import { Component, HostBinding, AfterViewInit, ChangeDetectionStrategy, ElementRef, Input } from '@angular/core';
+import {
+  Component, HostBinding, AfterViewInit, ChangeDetectionStrategy, ElementRef, Input, ContentChildren, QueryList, Renderer2, OnInit
+} from '@angular/core';
+import { GridstackItemComponent } from '../gridstack-item/gridstack-item.component';
+import { GridstackService } from '../gridstack.service';
 
 declare let jQuery: any;
 
@@ -8,19 +12,27 @@ declare let jQuery: any;
   styleUrls: ['./gridstack.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridstackComponent implements AfterViewInit {
-  @HostBinding('class') class = 'grid-stack';
+export class GridstackComponent implements OnInit {
+  @ContentChildren(GridstackItemComponent) items: QueryList<GridstackItemComponent>;
 
   @Input() options: any;
 
+  previousItems: Array<HTMLElement>;
   element: HTMLElement;
 
-  constructor(private elementRef: ElementRef) {
+  grid: any;
+
+  constructor(
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+    private gridstackService: GridstackService) {
     this.element = this.elementRef.nativeElement;
+    this.renderer.addClass(this.element, 'grid-stack');
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     jQuery(this.element).gridstack(this.options);
+    this.gridstackService.grid = jQuery(this.element).data('gridstack');
   }
 
 }

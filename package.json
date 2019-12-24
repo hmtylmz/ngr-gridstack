@@ -19,7 +19,6 @@
     "@angular/platform-browser": "~8.2.9",
     "@angular/platform-browser-dynamic": "~8.2.9",
     "@angular/router": "~8.2.9",
-    "@libria/gridstack": "^8.0.1",
     "gridstack": "^0.5.5",
     "jquery": "^3.4.1",
     "jquery-ui-dist": "^1.12.1",

@@ -1,4 +1,7 @@
-import { Component, OnInit, HostBinding, ChangeDetectionStrategy, Input, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, HostBinding, ChangeDetectionStrategy, Input, Renderer2, ElementRef, AfterViewInit } from '@angular/core';
+import { GridstackService } from '../gridstack.service';
+
+declare let jQuery: any;
 
 @Component({
   selector: 'app-gridstack-item',
@@ -6,9 +9,7 @@ import { Component, OnInit, HostBinding, ChangeDetectionStrategy, Input, Rendere
   styleUrls: ['./gridstack-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridstackItemComponent implements OnInit {
-  @HostBinding('class') class = 'grid-stack-item';
-
+export class GridstackItemComponent implements AfterViewInit {
   @Input() set x(value: number) {
     if (value !== this._x) {
       this._x = value;
@@ -49,7 +50,7 @@ export class GridstackItemComponent implements OnInit {
     return this._height;
   }
 
-  private element: HTMLElement;
+  element: HTMLElement;
 
   private _x: number;
   private _y: number;
@@ -58,11 +59,22 @@ export class GridstackItemComponent implements OnInit {
 
   constructor(
     private elementRef: ElementRef,
-    private renderer: Renderer2) {
+    private renderer: Renderer2,
+    private gridstackService: GridstackService) {
     this.element = this.elementRef.nativeElement;
+    this.renderer.addClass(this.element, 'grid-stack-item');
+    this.renderer.setAttribute(this.element, 'data-gs-no-resize', false.toString());
+    this.renderer.setAttribute(this.element, 'data-gs-no-move', false.toString());
+    this.renderer.setAttribute(this.element, 'data-gs-locked', false.toString());
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    console.log(this.gridstackService.grid);
+    if (this.gridstackService.grid.willItFit(this.x, this.y, this.width, this.height, true)) {
+      this.gridstackService.grid.makeWidget(this.element);
+    } else {
+      console.error('Not enough free space to place the widget');
+    }
   }
 
 }

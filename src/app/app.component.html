@@ -1,12 +1,4 @@
 <div>
-  <!-- <div lb-gridstack [options]="options" width="50" style="background-color: #fff;">
-    <div lb-gridstack-item x="0" y="0" width="3">
-      Widget 1
-    </div>
-    <div lb-gridstack-item x="3" y="0" width="2">
-      Widget 2
-    </div>
-  </div> -->
   <app-gridstack [options]="options">
     <app-gridstack-item *ngFor="let item of items; index as index" [x]="item.x" [y]="item.y" [width]="item.width" [height]="item.height">
       Hello {{index}}
