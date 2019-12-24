@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NgGridstackItemComponent } from './ng-gridstack-item.component';
+import { NgxGridstackComponent } from './ngx-gridstack.component';
 
-describe('NgGridstackItemComponent', () => {
-  let component: NgGridstackItemComponent;
-  let fixture: ComponentFixture<NgGridstackItemComponent>;
+describe('NgxGridstackComponent', () => {
+  let component: NgxGridstackComponent;
+  let fixture: ComponentFixture<NgxGridstackComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NgGridstackItemComponent ]
+      declarations: [ NgxGridstackComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NgGridstackItemComponent);
+    fixture = TestBed.createComponent(NgxGridstackComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
