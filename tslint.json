@@ -13,12 +13,14 @@
       true,
       "attribute",
       "app",
+      "ng",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
       "app",
+      "ng",
       "kebab-case"
     ],
     "import-blacklist": [

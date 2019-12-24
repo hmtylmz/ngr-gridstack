@@ -4,17 +4,17 @@
 import {
   Component, ChangeDetectionStrategy, ElementRef, Input, ContentChildren, QueryList, Renderer2, OnInit, Output, EventEmitter
 } from '@angular/core';
-import { GridstackItemComponent } from '../gridstack-item/gridstack-item.component';
-import { GridstackService } from '../gridstack.service';
+import { NgGridstackItemComponent } from '../ng-gridstack-item/ng-gridstack-item.component';
+import { NgGridstackService } from '../../services/ng-gridstack.service';
 
 @Component({
-  selector: 'app-gridstack',
-  templateUrl: './gridstack.component.html',
-  styleUrls: ['./gridstack.component.scss'],
+  selector: 'ng-gridstack',
+  templateUrl: './ng-gridstack.component.html',
+  styleUrls: ['./ng-gridstack.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridstackComponent implements OnInit {
-  @ContentChildren(GridstackItemComponent) items: QueryList<GridstackItemComponent>;
+export class NgGridstackComponent implements OnInit {
+  @ContentChildren(NgGridstackItemComponent) items: QueryList<NgGridstackItemComponent>;
 
   @Input() options: GridstackOptions;
   @Output() change = new EventEmitter<any>();
@@ -25,7 +25,7 @@ export class GridstackComponent implements OnInit {
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    private gridstackService: GridstackService) {
+    private gridstackService: NgGridstackService) {
     this.element = this.elementRef.nativeElement;
     this.renderer.addClass(this.element, 'grid-stack');
   }

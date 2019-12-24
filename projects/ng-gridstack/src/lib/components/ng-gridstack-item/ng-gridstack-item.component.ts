@@ -2,15 +2,15 @@
 /// <reference types="gridstack" />
 
 import { Component, ChangeDetectionStrategy, Input, Renderer2, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { GridstackService } from '../gridstack.service';
+import { NgGridstackService } from '../../services/ng-gridstack.service';
 
 @Component({
-  selector: 'app-gridstack-item',
-  templateUrl: './gridstack-item.component.html',
-  styleUrls: ['./gridstack-item.component.scss'],
+  selector: 'ng-gridstack-item',
+  templateUrl: './ng-gridstack-item.component.html',
+  styleUrls: ['./ng-gridstack-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridstackItemComponent implements AfterViewInit, OnDestroy {
+export class NgGridstackItemComponent implements AfterViewInit, OnDestroy {
   @Input() id: string;
 
   @Input() set x(value: number) {
@@ -67,7 +67,7 @@ export class GridstackItemComponent implements AfterViewInit, OnDestroy {
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    private gridstackService: GridstackService) {
+    private gridstackService: NgGridstackService) {
     this.element = this.elementRef.nativeElement;
     this.renderer.addClass(this.element, 'grid-stack-item');
     this.renderer.setAttribute(this.element, 'data-gs-no-resize', false.toString());

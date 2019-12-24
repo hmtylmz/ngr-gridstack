@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ng-gridstack": [
+        "dist/ng-gridstack"
+      ],
+      "ng-gridstack/*": [
+        "dist/ng-gridstack/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

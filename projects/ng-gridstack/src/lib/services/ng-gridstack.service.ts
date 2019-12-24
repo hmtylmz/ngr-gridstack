@@ -4,6 +4,6 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class GridstackService {
+export class NgGridstackService {
   grid: GridStack;
 }
