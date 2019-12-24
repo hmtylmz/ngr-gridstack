@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, ChangeDetectionStrategy, Input, Renderer2, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, HostBinding, ChangeDetectionStrategy, Input, Renderer2, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { GridstackService } from '../gridstack.service';
 
 declare let jQuery: any;
@@ -9,7 +9,9 @@ declare let jQuery: any;
   styleUrls: ['./gridstack-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridstackItemComponent implements AfterViewInit {
+export class GridstackItemComponent implements AfterViewInit, OnDestroy {
+  @Input() id: string;
+
   @Input() set x(value: number) {
     if (value !== this._x) {
       this._x = value;
@@ -51,6 +53,7 @@ export class GridstackItemComponent implements AfterViewInit {
   }
 
   element: HTMLElement;
+  private gridItem: any;
 
   private _x: number;
   private _y: number;
@@ -70,11 +73,16 @@ export class GridstackItemComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     console.log(this.gridstackService.grid);
+    this.renderer.setAttribute(this.element, 'data-gs-id', this.id);
     if (this.gridstackService.grid.willItFit(this.x, this.y, this.width, this.height, true)) {
-      this.gridstackService.grid.makeWidget(this.element);
+      this.gridItem = this.gridstackService.grid.makeWidget(this.element);
     } else {
       console.error('Not enough free space to place the widget');
     }
+  }
+
+  ngOnDestroy(): void {
+    this.gridstackService.grid.remove(this.element);
   }
 
 }
