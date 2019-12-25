@@ -8,3 +8,7 @@ export * from './lib/ngr-gridstack.module';
 
 export * from './lib/components/ngr-gridstack/ngr-gridstack.component';
 export * from './lib/components/ngr-gridstack-item/ngr-gridstack-item.component';
+
+// Interfaces
+
+export * from './lib/models/gridstack-item.interface';

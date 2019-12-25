@@ -8,6 +8,7 @@ import { Component, AfterViewInit } from '@angular/core';
 export class AppComponent implements AfterViewInit {
   title = 'gridstack-angular';
 
+  gridDisabled = true;
   options = {
     animate: true,
     cellHeight: 5,
@@ -68,6 +69,7 @@ export class AppComponent implements AfterViewInit {
           minWidth: 3,
           minHeight: 3
         });
+        this.gridDisabled = false;
       }, 3000);
     }, 1000);
   }

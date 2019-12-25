@@ -2,9 +2,8 @@
 /// <reference types="gridstack" />
 
 import {
-  Component, ChangeDetectionStrategy, ElementRef, Input, ContentChildren, QueryList, Renderer2, OnInit, Output, EventEmitter
+  Component, ChangeDetectionStrategy, ElementRef, Input, Renderer2, OnInit, Output, EventEmitter
 } from '@angular/core';
-import { NgrGridstackItemComponent } from '../ngr-gridstack-item/ngr-gridstack-item.component';
 import { NgrGridstackService } from '../../services/ngr-gridstack.service';
 import { GridstackItem } from '../../models/gridstack-item.interface';
 
@@ -16,6 +15,14 @@ import { GridstackItem } from '../../models/gridstack-item.interface';
 })
 export class NgrGridstackComponent implements OnInit {
   @Input() options: GridstackOptions;
+
+  @Input() set disabled(value: boolean) {
+    if (value !== this._disabled) {
+      this._disabled = value;
+      this.setGridDisabled(this.gridstackService.grid, this._disabled);
+    }
+  }
+
   @Output() added = new EventEmitter<GridstackItem[]>();
   // tslint:disable-next-line: no-output-native
   @Output() change = new EventEmitter<GridstackItem[]>();
@@ -29,7 +36,8 @@ export class NgrGridstackComponent implements OnInit {
   @Output() resizestart = new EventEmitter<GridstackItem>();
   @Output() gsresizestop = new EventEmitter<GridstackItem>();
 
-  element: HTMLElement;
+  private element: HTMLElement;
+  private _disabled: boolean;
 
   constructor(
     private elementRef: ElementRef,
@@ -42,6 +50,14 @@ export class NgrGridstackComponent implements OnInit {
   ngOnInit() {
     jQuery(this.element).gridstack(this.options);
     this.gridstackService.grid = jQuery(this.element).data('gridstack');
+    setTimeout(() => {
+      this.setGridDisabled(this.gridstackService.grid, this._disabled);
+    }, 0);
+
+    this.registerEvents();
+  }
+
+  private registerEvents() {
     jQuery(this.element).on('added', (event, items: GridstackItem[]) => this.added.emit(items));
     jQuery(this.element).on('change', (event, items: GridstackItem[]) => this.change.emit(items));
     jQuery(this.element).on('disable', (event) => this.disable.emit(event.target));
@@ -52,6 +68,16 @@ export class NgrGridstackComponent implements OnInit {
     jQuery(this.element).on('removed', (event, items: GridstackItem[]) => this.removed.emit(items));
     jQuery(this.element).on('resizestart', (event, item: GridstackItem) => this.resizestart.emit(item));
     jQuery(this.element).on('gsresizestop', (event, item: GridstackItem) => this.gsresizestop.emit(item));
+  }
+
+  private setGridDisabled(grid: GridStack, disabled: boolean): void {
+    if (grid) {
+      if (disabled) {
+        this.gridstackService.grid.disable();
+      } else {
+        this.gridstackService.grid.enable();
+      }
+    }
   }
 
 }
