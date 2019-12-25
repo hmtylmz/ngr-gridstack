@@ -1,7 +1,10 @@
 <div>
-  <ngx-gridstack [options]="options">
-    <ngx-gridstack-item *ngFor="let item of items; index as index" [x]="item.x" [y]="item.y" [width]="item.width" [height]="item.height" [id]="item.id">
+  <ngr-gridstack [options]="options">
+    <ngr-gridstack-item *ngFor="let item of items; index as index"
+    [x]="item.x" [y]="item.y" [width]="item.width" [height]="item.height" [id]="item.id"
+    [minHeight]="item.minHeight" [maxHeight]="item.maxHeight"
+    [minWidth]="item.minWidth" [maxWidth]="item.maxWidth">
       Id: {{item.id}}
-    </ngx-gridstack-item>
-  </ngx-gridstack>
+    </ngr-gridstack-item>
+  </ngr-gridstack>
 </div>

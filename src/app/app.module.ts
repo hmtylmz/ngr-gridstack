@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
-import { NgxGridstackModule } from 'projects/ngx-gridstack/src/lib/ngx-gridstack.module';
+import { NgrGridstackModule } from 'projects/ngr-gridstack/src/lib/ngr-gridstack.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,7 @@ import { NgxGridstackModule } from 'projects/ngx-gridstack/src/lib/ngx-gridstack
     BrowserModule,
     CommonModule,
     AppRoutingModule,
-    NgxGridstackModule
+    NgrGridstackModule
   ],
   providers: [],
   bootstrap: [AppComponent]

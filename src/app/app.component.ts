@@ -9,6 +9,7 @@ export class AppComponent implements AfterViewInit {
   title = 'gridstack-angular';
 
   options = {
+    cellHeight: 5,
     column: 50,
     alwaysShowResizeHandle: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
   };
@@ -19,14 +20,22 @@ export class AppComponent implements AfterViewInit {
       x: 0,
       y: 0,
       width: 5,
-      height: 5
+      height: 5,
+      maxWidth: 10,
+      maxHeight: 10,
+      minWidth: 3,
+      minHeight: 3
     },
     {
       id: 'bcd',
       x: 10,
       y: 10,
       width: 15,
-      height: 10
+      height: 10,
+      maxWidth: 10,
+      maxHeight: 10,
+      minWidth: 3,
+      minHeight: 3
     }
   ];
 
@@ -39,7 +48,11 @@ export class AppComponent implements AfterViewInit {
         x: 3,
         y: 10,
         width: 5,
-        height: 5
+        height: 5,
+        maxWidth: 10,
+        maxHeight: 10,
+        minWidth: 3,
+        minHeight: 3
       });
       setTimeout(() => {
         // this.items[0].x = 20;
@@ -48,7 +61,11 @@ export class AppComponent implements AfterViewInit {
           x: 3,
           y: 10,
           width: 5,
-          height: 5
+          height: 5,
+          maxWidth: 10,
+          maxHeight: 10,
+          minWidth: 3,
+          minHeight: 3
         });
       }, 3000);
     }, 1000);
