@@ -1,5 +1,5 @@
 <div>
-  <ngr-gridstack [options]="options">
+  <ngr-gridstack [options]="options" (change)="changed($event)">
     <ngr-gridstack-item *ngFor="let item of items; index as index"
     [x]="item.x" [y]="item.y" [width]="item.width" [height]="item.height" [id]="item.id"
     [minHeight]="item.minHeight" [maxHeight]="item.maxHeight"

@@ -9,10 +9,11 @@ export class AppComponent implements AfterViewInit {
   title = 'gridstack-angular';
 
   options = {
+    animate: true,
     cellHeight: 5,
     column: 50,
     alwaysShowResizeHandle: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-  };
+  } as GridstackOptions;
 
   items = [
     {
@@ -69,5 +70,9 @@ export class AppComponent implements AfterViewInit {
         });
       }, 3000);
     }, 1000);
+  }
+
+  changed(items) {
+    console.log(items);
   }
 }
