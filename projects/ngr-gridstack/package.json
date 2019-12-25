@@ -1,6 +1,6 @@
 {
   "name": "ngr-gridstack",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "peerDependencies": {
     "jquery": "^3.4.1",
     "@angular/common": "^8.0.0",
