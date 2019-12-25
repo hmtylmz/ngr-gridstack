@@ -101,6 +101,61 @@ export class NgrGridstackItemComponent implements AfterViewInit, OnDestroy {
     return this._maxHeight;
   }
 
+  @Input() set noResize(value: boolean) {
+    if (value !== this._noResize) {
+      this._noResize = value;
+      this.renderer.setAttribute(this.element, 'data-gs-no-resize', this._noResize.toString());
+      this.resize();
+    }
+  }
+  get noResize(): boolean {
+    return this._noResize;
+  }
+
+  @Input() set noMove(value: boolean) {
+    if (value !== this._noMove) {
+      this._noMove = value;
+      this.renderer.setAttribute(this.element, 'data-gs-no-resize', this._noMove.toString());
+      this.resize();
+    }
+  }
+  get noMove(): boolean {
+    return this._noMove;
+  }
+
+  @Input() set autoPosition(value: boolean) {
+    if (value !== this._autoPosition) {
+      this._autoPosition = value;
+      this.renderer.setAttribute(this.element, 'data-gs-auto-position', this._autoPosition.toString());
+      this.resize();
+    }
+  }
+  get autoPosition(): boolean {
+    return this._autoPosition;
+  }
+
+  @Input() set locked(value: boolean) {
+    if (value !== this._locked) {
+      this._locked = value;
+      this.renderer.setAttribute(this.element, 'data-gs-locked', this._locked.toString());
+      this.resize();
+    }
+  }
+  get locked(): boolean {
+    return this._locked;
+  }
+
+  @Input() set resizeHandles(value: boolean) {
+    if (value !== this._resizeHandles) {
+      this._resizeHandles = value;
+      this.renderer.setAttribute(this.element, 'data-gs-resize-handles', this._resizeHandles.toString());
+      this.resize();
+    }
+  }
+  get resizeHandles(): boolean {
+    return this._resizeHandles;
+  }
+
   element: HTMLElement;
 
   private _x: number;
@@ -111,6 +166,11 @@ export class NgrGridstackItemComponent implements AfterViewInit, OnDestroy {
   private _height: number;
   private _minHeight: number;
   private _maxHeight: number;
+  private _noResize: boolean;
+  private _noMove: boolean;
+  private _autoPosition: boolean;
+  private _locked: boolean;
+  private _resizeHandles: boolean;
 
   constructor(
     private elementRef: ElementRef,
@@ -118,9 +178,6 @@ export class NgrGridstackItemComponent implements AfterViewInit, OnDestroy {
     private gridstackService: NgrGridstackService) {
     this.element = this.elementRef.nativeElement;
     this.renderer.addClass(this.element, 'grid-stack-item');
-    this.renderer.setAttribute(this.element, 'data-gs-no-resize', false.toString());
-    this.renderer.setAttribute(this.element, 'data-gs-no-move', false.toString());
-    this.renderer.setAttribute(this.element, 'data-gs-locked', false.toString());
   }
 
   ngAfterViewInit() {
