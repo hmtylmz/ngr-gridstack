@@ -1,6 +1,10 @@
 {
   "name": "gridstack-angular",
   "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hmtylmz/ngr-gridstack"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -19,7 +23,7 @@
     "@angular/platform-browser": "~9.0.1",
     "@angular/platform-browser-dynamic": "~9.0.1",
     "@angular/router": "~9.0.1",
-    "gridstack": "^0.5.5",
+    "gridstack": "^0.6.4",
     "jquery": "^3.4.1",
     "jquery-ui-dist": "^1.12.1",
     "jquery-ui-touch-punch": "^0.2.3",
