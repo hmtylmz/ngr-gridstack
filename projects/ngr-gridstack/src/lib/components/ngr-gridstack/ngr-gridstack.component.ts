@@ -1,11 +1,15 @@
 /// <reference types="jquery" />
 /// <reference types="gridstack" />
 
+import { Subscription } from 'rxjs/internal/Subscription';
+
 import {
-  Component, ChangeDetectionStrategy, ElementRef, Input, Renderer2, OnInit, Output, EventEmitter
+  AfterViewInit, ChangeDetectionStrategy, Component, ContentChildren, ElementRef, EventEmitter,
+  Input, OnDestroy, OnInit, Output, QueryList, Renderer2
 } from '@angular/core';
-import { NgrGridstackService } from '../../services/ngr-gridstack.service';
+
 import { GridstackItem } from '../../models/gridstack-item.interface';
+import { NgrGridstackItemComponent } from '../ngr-gridstack-item/ngr-gridstack-item.component';
 
 @Component({
   selector: 'ngr-gridstack',
@@ -13,13 +17,15 @@ import { GridstackItem } from '../../models/gridstack-item.interface';
   styleUrls: ['./ngr-gridstack.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NgrGridstackComponent implements OnInit {
+export class NgrGridstackComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ContentChildren(NgrGridstackItemComponent) items: QueryList<NgrGridstackItemComponent>;
+
   @Input() options: GridstackOptions;
 
   @Input() set disabled(value: boolean) {
     if (value !== this._disabled) {
       this._disabled = value;
-      this.setGridDisabled(this.gridstackService.grid, this._disabled);
+      this.setGridDisabled(this.grid, this._disabled);
     }
   }
 
@@ -38,23 +44,43 @@ export class NgrGridstackComponent implements OnInit {
 
   private element: HTMLElement;
   private _disabled: boolean;
+  private grid: GridStack;
+
+  private contentChildrenChangesSubscription: Subscription;
 
   constructor(
     private elementRef: ElementRef,
-    private renderer: Renderer2,
-    private gridstackService: NgrGridstackService) {
+    private renderer: Renderer2) {
     this.element = this.elementRef.nativeElement;
     this.renderer.addClass(this.element, 'grid-stack');
   }
 
   ngOnInit() {
     jQuery(this.element).gridstack(this.options);
-    this.gridstackService.grid = jQuery(this.element).data('gridstack');
+    this.grid = jQuery(this.element).data('gridstack');
     setTimeout(() => {
-      this.setGridDisabled(this.gridstackService.grid, this._disabled);
+      this.setGridDisabled(this.grid, this._disabled);
     }, 0);
-
     this.registerEvents();
+  }
+
+  ngAfterViewInit() {
+    this.initContent();
+    this.contentChildrenChangesSubscription = this.items.changes.subscribe((items: NgrGridstackItemComponent[]) => {
+      this.initContent();
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.contentChildrenChangesSubscription) {
+      this.contentChildrenChangesSubscription.unsubscribe();
+    }
+  }
+
+  private initContent() {
+    this.items.forEach((item: NgrGridstackItemComponent) => {
+      item.setGrid(this.grid);
+    });
   }
 
   private registerEvents() {
@@ -73,9 +99,9 @@ export class NgrGridstackComponent implements OnInit {
   private setGridDisabled(grid: GridStack, disabled: boolean): void {
     if (grid) {
       if (disabled) {
-        this.gridstackService.grid.disable();
+        this.grid.disable();
       } else {
-        this.gridstackService.grid.enable();
+        this.grid.enable();
       }
     }
   }

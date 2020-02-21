@@ -1,8 +1,9 @@
 /// <reference types="jquery" />
 /// <reference types="gridstack" />
 
-import { Component, ChangeDetectionStrategy, Input, Renderer2, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { NgrGridstackService } from '../../services/ngr-gridstack.service';
+import {
+  AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, Renderer2
+} from '@angular/core';
 
 @Component({
   selector: 'ngr-gridstack-item',
@@ -157,6 +158,7 @@ export class NgrGridstackItemComponent implements AfterViewInit, OnDestroy {
   }
 
   element: HTMLElement;
+  grid: GridStack;
 
   private _x: number;
   private _y: number;
@@ -174,31 +176,47 @@ export class NgrGridstackItemComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private elementRef: ElementRef,
-    private renderer: Renderer2,
-    private gridstackService: NgrGridstackService) {
+    private renderer: Renderer2) {
     this.element = this.elementRef.nativeElement;
     this.renderer.addClass(this.element, 'grid-stack-item');
   }
 
   ngAfterViewInit() {
     this.renderer.setAttribute(this.element, 'data-gs-id', this.id);
-    if (this.gridstackService.grid.willItFit(this.x, this.y, this.width, this.height, true)) {
-      this.gridstackService.grid.makeWidget(this.element);
-    } else {
-      console.error('Not enough free space to place the widget');
-    }
+    this.init();
   }
 
   ngOnDestroy(): void {
-    this.gridstackService.grid.removeWidget(this.element);
+    this.grid.removeWidget(this.element);
+  }
+
+  setGrid(grid: GridStack): void {
+    if (!this.grid) {
+      this.grid = grid;
+      this.init();
+    }
+  }
+
+  init() {
+    if (this.grid) {
+      if (this.grid.willItFit(this.x, this.y, this.width, this.height, true)) {
+        this.grid.makeWidget(this.element);
+      } else {
+        console.error('Not enough free space to place the widget');
+      }
+    }
   }
 
   private move() {
-    this.gridstackService.grid.move(this.element, this.x, this.y);
+    if (this.grid) {
+      this.grid.move(this.element, this.x, this.y);
+    }
   }
 
   private resize() {
-    this.gridstackService.grid.resize(this.element, this.width, this.height);
+    if (this.grid) {
+      this.grid.resize(this.element, this.width, this.height);
+    }
   }
 
 }
