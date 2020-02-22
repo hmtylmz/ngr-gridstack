@@ -1,6 +1,6 @@
 {
   "name": "ngr-gridstack",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/hmtylmz/ngr-gridstack"
@@ -9,6 +9,6 @@
     "jquery": "^3.4.1",
     "@angular/common": "^8.0.0 || ^9.0.0",
     "@angular/core": "^8.0.0 || ^9.0.0",
-    "gridstack": "^0.5.5"
+    "gridstack": "^0.5.0 || ^0.6.0"
   }
 }
