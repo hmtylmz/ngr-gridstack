@@ -33,7 +33,6 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/lodash/lodash.min.js",
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/jquery-ui-dist/jquery-ui.js",
               "node_modules/jquery-ui-touch-punch/jquery.ui.touch-punch.js",
@@ -144,13 +143,13 @@
           "options": {
             "tsConfig": "projects/ngr-gridstack/tsconfig.lib.json",
             "project": "projects/ngr-gridstack/ng-package.json"
-          }
-        ,          "configurations": {
+          },
+          "configurations": {
             "production": {
               "tsConfig": "projects/ngr-gridstack/tsconfig.lib.prod.json"
             }
           }
-},
+        },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
@@ -172,6 +171,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "gridstack-angular"
 }
