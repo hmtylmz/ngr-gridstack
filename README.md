@@ -1,27 +1,33 @@
 # GridstackAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.8.
+This project gridstackjs[https://gridstackjs.com/] wrapper for angular applications.
 
-## Development server
+# Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Install Dependencies
 
-## Code scaffolding
+```shell
+- npm i gridstack
+- npm i jquery
+- npm i jquery-ui-dist
+- npm i --save-dev @types/gridstack
+- npm i jquery-ui-touch-punch ( Optional, if you want mobile support )
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Configure angular.json File
+```shell
+"styles": [
+  ...
+  "node_modules/gridstack/dist/gridstack.css",
+  ...
+],
+"scripts": [
+  ...
+  "node_modules/jquery/dist/jquery.min.js",
+  "node_modules/jquery-ui-dist/jquery-ui.js",
+  "node_modules/jquery-ui-touch-punch/jquery.ui.touch-punch.js", ( Optional, if you want mobile support )
+  "node_modules/gridstack/dist/gridstack.js",
+  "node_modules/gridstack/dist/gridstack.jQueryUI.js"
+  ...
+]
+```
