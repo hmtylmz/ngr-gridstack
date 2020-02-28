@@ -10,7 +10,7 @@ This project gridstackjs[https://gridstackjs.com/] wrapper for angular applicati
 - npm i gridstack
 - npm i jquery
 - npm i jquery-ui-dist
-- npm i --save-dev @types/gridstack
+- npm i --save-dev @types/gridstack@0.5.0
 - npm i jquery-ui-touch-punch ( Optional, if you want mobile support )
 ```
 
